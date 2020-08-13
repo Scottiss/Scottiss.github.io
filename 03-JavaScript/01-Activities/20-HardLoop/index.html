@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop</title>
+</head>
+<body>
+    <h1>Loop Test!</h1>
+
+    <script>
+        var myFarm = ["chickens", "pigs", "cows", "horses", "ostriches"];
+
+        var arrayLength = myFarm.length;
+        for (var j = 0; j < arrayLength; j++) {
+            console.log(myFarm[j]);
+            if (myFarm[j].charAt(0) === "c" || myFarm[j].charAt(0) === "o") {
+                alert("Starts with a c or an o!");
+            }
+        }
+
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Quoth the Giphy</title>
+</head>
+
+<body>
+  <div id="buttons">
+    <button data-person="arnold schwarzenegger">
+      I'll be back
+    </button>
+    <button data-person="michael j fox">
+      My happiness grows in direct proportion to my acceptance,
+      and in inverse proportion to my expectations.
+    </button>
+
+
+    <!-- STEP ONE: Open this file in the browser and click on the buttons. Watch what happens -->
+
+
+    <!-- STEP TWO: between the dashed lines below
+            * add three more buttons
+            * add a data-person attribute of famous people you know
+            * with a quote said by them -->
+
+    <!-- **************************************** -->
+
+    <!-- YOUR BUTTONS GO HERE!!!!!! Delete this comment and put your buttons here.  -->
+    <button data-person="paul walker">
+      I want to have the freedom to do whatever I want.
+    </button>
+    <button data-person="britney spears">
+      It's Britney, bitch.
+    </button>
+    <button data-person="meg ryan">
+      People are always telling me that change is good.
+    </button>
+    <!-- **************************************** -->
+
+
+    <!-- STEP THREE: open this file in the browser and click on your buttons. If they don't work, then fix your buttons -->
+
+    <!-- STEP FOUR: go over the JavaScript with your partners, and explain the lines of code to each other. -->
+
+  </div>
+
+  <div id="gifs-appear-here">
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  // user button
+    $("button").on("click", function() {
+
+      // once the button is clicked it sets the attributes to the celebrity
+      var person = $(this).attr("data-person");
+
+      // on click, find the gif for the celebrity
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        person + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+      // querying using the API
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+
+      // because button was clicked in query, the following response will display
+        .then(function(response) {
+
+          // whatever data the function pulls = result
+          var results = response.data;
+
+          // for loop 
+          for (var i = 0; i < results.length; i++) {
+            var gifDiv = $("<div>");
+
+            var rating = results[i].rating;
+
+            var p = $("<p>").text("Rating: " + rating);
+
+            var personImage = $("<img>");
+            personImage.attr("src", results[i].images.fixed_height.url);
+
+            gifDiv.prepend(p);
+            gifDiv.prepend(personImage);
+
+              // displaying gifs to screen
+            $("#gifs-appear-here").prepend(gifDiv);
+          }
+        });
+    });
+  </script>
+</body>
+
+</html>
